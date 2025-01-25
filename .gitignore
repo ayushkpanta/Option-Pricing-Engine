@@ -1,0 +1,19 @@
+# ignore directories
+build/
+bin/
+obj/
+
+# ignore IDE ++
+.vscode/
+.idea/
+.DS_Store
+
+# hide compiled files
+*.o
+*.a
+*.out
+*.log
+
+# hide doxygen and debug
+docs/
+*.dSYM/
