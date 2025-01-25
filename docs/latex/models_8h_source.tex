@@ -1,0 +1,22 @@
+\doxysection{models.\+h}
+\hypertarget{models_8h_source}{}\label{models_8h_source}\mbox{\hyperlink{models_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#ifndef\ MODELS\_H}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#define\ MODELS\_H}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00016\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_black_scholes_model}{BlackScholesModel}}\ \{}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_black_scholes_model_a3ce13559ca58c025cc68e8eb87ad1bfc}{BlackScholesModel}}();}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_black_scholes_model_a0de76d4915e4d256629fe7a6201dab32}{price\_call}}(\textcolor{keywordtype}{double}\ S,\ \textcolor{keywordtype}{double}\ X,\ \textcolor{keywordtype}{double}\ sigma,\ \textcolor{keywordtype}{double}\ r,\ \textcolor{keywordtype}{double}\ T);}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_black_scholes_model_adbc9a0016f330e9af27101a0063ce6d5}{price\_put}}(\textcolor{keywordtype}{double}\ S,\ \textcolor{keywordtype}{double}\ X,\ \textcolor{keywordtype}{double}\ sigma,\ \textcolor{keywordtype}{double}\ r,\ \textcolor{keywordtype}{double}\ T);}
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Internal\ compuations}}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ compute\_d1(\textcolor{keywordtype}{double}\ S,\ \textcolor{keywordtype}{double}\ X,\ \textcolor{keywordtype}{double}\ sigma,\ \textcolor{keywordtype}{double}\ r,\ \textcolor{keywordtype}{double}\ T);}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ compute\_d2(\textcolor{keywordtype}{double}\ d1,\ \textcolor{keywordtype}{double}\ sigma,\ \textcolor{keywordtype}{double}\ T);}
+\DoxyCodeLine{00046\ \};}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

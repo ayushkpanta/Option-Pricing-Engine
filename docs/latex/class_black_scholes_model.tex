@@ -1,0 +1,127 @@
+\doxysection{Black\+Scholes\+Model Class Reference}
+\hypertarget{class_black_scholes_model}{}\label{class_black_scholes_model}\index{BlackScholesModel@{BlackScholesModel}}
+
+
+Model for pricing European-\/style options using the Black-\/\+Scholes formula.  
+
+
+
+
+{\ttfamily \#include $<$models.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_black_scholes_model_a3ce13559ca58c025cc68e8eb87ad1bfc}{Black\+Scholes\+Model}} ()
+\item 
+double \mbox{\hyperlink{class_black_scholes_model_a0de76d4915e4d256629fe7a6201dab32}{price\+\_\+call}} (double S, double X, double sigma, double r, double T)
+\item 
+double \mbox{\hyperlink{class_black_scholes_model_adbc9a0016f330e9af27101a0063ce6d5}{price\+\_\+put}} (double S, double X, double sigma, double r, double T)
+\item 
+\mbox{\hyperlink{class_black_scholes_model_a3ce13559ca58c025cc68e8eb87ad1bfc}{Black\+Scholes\+Model}} ()
+\item 
+double \mbox{\hyperlink{class_black_scholes_model_a0de76d4915e4d256629fe7a6201dab32}{price\+\_\+call}} (double S, double X, double sigma, double r, double T)
+\begin{DoxyCompactList}\small\item\em Computes the price of a European call option using the Black-\/\+Scholes model. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_black_scholes_model_adbc9a0016f330e9af27101a0063ce6d5}{price\+\_\+put}} (double S, double X, double sigma, double r, double T)
+\begin{DoxyCompactList}\small\item\em Computes the price of a European put option using the Black-\/\+Scholes model. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Model for pricing European-\/style options using the Black-\/\+Scholes formula. 
+
+This class provides functionality for calculating the prices of call and put options based on the Black-\/\+Scholes model. This handles Eurpoean-\/style options, which only allow an option contract to be executed at expiration.
+
+Below is a snippet that shows how the model may be used. 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{class_black_scholes_model_a3ce13559ca58c025cc68e8eb87ad1bfc}{BlackScholesModel}}\ bsm;}
+\DoxyCodeLine{\textcolor{keywordtype}{double}\ call\_price\ =\ bsm.\mbox{\hyperlink{class_black_scholes_model_a0de76d4915e4d256629fe7a6201dab32}{price\_call}}(S,\ X,\ sigma,\ r,\ T);}
+
+\end{DoxyCode}
+ 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_black_scholes_model_a3ce13559ca58c025cc68e8eb87ad1bfc}\index{BlackScholesModel@{BlackScholesModel}!BlackScholesModel@{BlackScholesModel}}
+\index{BlackScholesModel@{BlackScholesModel}!BlackScholesModel@{BlackScholesModel}}
+\doxysubsubsection{\texorpdfstring{BlackScholesModel()}{BlackScholesModel()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_black_scholes_model_a3ce13559ca58c025cc68e8eb87ad1bfc} 
+Black\+Scholes\+Model\+::\+Black\+Scholes\+Model (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_black_scholes_model_a3ce13559ca58c025cc68e8eb87ad1bfc}\index{BlackScholesModel@{BlackScholesModel}!BlackScholesModel@{BlackScholesModel}}
+\index{BlackScholesModel@{BlackScholesModel}!BlackScholesModel@{BlackScholesModel}}
+\doxysubsubsection{\texorpdfstring{BlackScholesModel()}{BlackScholesModel()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_black_scholes_model_a3ce13559ca58c025cc68e8eb87ad1bfc} 
+Black\+Scholes\+Model\+::\+Black\+Scholes\+Model (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_black_scholes_model_a0de76d4915e4d256629fe7a6201dab32}\index{BlackScholesModel@{BlackScholesModel}!price\_call@{price\_call}}
+\index{price\_call@{price\_call}!BlackScholesModel@{BlackScholesModel}}
+\doxysubsubsection{\texorpdfstring{price\_call()}{price\_call()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_black_scholes_model_a0de76d4915e4d256629fe7a6201dab32} 
+double Black\+Scholes\+Model\+::price\+\_\+call (\begin{DoxyParamCaption}\item[{double}]{S}{, }\item[{double}]{X}{, }\item[{double}]{sigma}{, }\item[{double}]{r}{, }\item[{double}]{T}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_black_scholes_model_a0de76d4915e4d256629fe7a6201dab32}\index{BlackScholesModel@{BlackScholesModel}!price\_call@{price\_call}}
+\index{price\_call@{price\_call}!BlackScholesModel@{BlackScholesModel}}
+\doxysubsubsection{\texorpdfstring{price\_call()}{price\_call()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_black_scholes_model_a0de76d4915e4d256629fe7a6201dab32} 
+double Black\+Scholes\+Model\+::price\+\_\+call (\begin{DoxyParamCaption}\item[{double}]{S}{, }\item[{double}]{X}{, }\item[{double}]{sigma}{, }\item[{double}]{r}{, }\item[{double}]{T}{}\end{DoxyParamCaption})}
+
+
+
+Computes the price of a European call option using the Black-\/\+Scholes model. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em S} & The current spot price of the underlying asset. \\
+\hline
+{\em X} & The strike price of the selected option. \\
+\hline
+{\em sigma} & The annualized volatility of the underlying asset. \\
+\hline
+{\em r} & The annualized risk-\/free interest rate. \\
+\hline
+{\em T} & The time to maturity in years. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The price of the call option. 
+\end{DoxyReturn}
+\Hypertarget{class_black_scholes_model_adbc9a0016f330e9af27101a0063ce6d5}\index{BlackScholesModel@{BlackScholesModel}!price\_put@{price\_put}}
+\index{price\_put@{price\_put}!BlackScholesModel@{BlackScholesModel}}
+\doxysubsubsection{\texorpdfstring{price\_put()}{price\_put()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_black_scholes_model_adbc9a0016f330e9af27101a0063ce6d5} 
+double Black\+Scholes\+Model\+::price\+\_\+put (\begin{DoxyParamCaption}\item[{double}]{S}{, }\item[{double}]{X}{, }\item[{double}]{sigma}{, }\item[{double}]{r}{, }\item[{double}]{T}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_black_scholes_model_adbc9a0016f330e9af27101a0063ce6d5}\index{BlackScholesModel@{BlackScholesModel}!price\_put@{price\_put}}
+\index{price\_put@{price\_put}!BlackScholesModel@{BlackScholesModel}}
+\doxysubsubsection{\texorpdfstring{price\_put()}{price\_put()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_black_scholes_model_adbc9a0016f330e9af27101a0063ce6d5} 
+double Black\+Scholes\+Model\+::price\+\_\+put (\begin{DoxyParamCaption}\item[{double}]{S}{, }\item[{double}]{X}{, }\item[{double}]{sigma}{, }\item[{double}]{r}{, }\item[{double}]{T}{}\end{DoxyParamCaption})}
+
+
+
+Computes the price of a European put option using the Black-\/\+Scholes model. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em S} & The current spot price of the underlying asset. \\
+\hline
+{\em X} & The strike price of the selected option. \\
+\hline
+{\em sigma} & The annualized volatility of the underlying asset. \\
+\hline
+{\em r} & The annualized risk-\/free interest rate. \\
+\hline
+{\em T} & The time to maturity in years. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The price of the put option. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{black__scholes_8cpp}{black\+\_\+scholes.\+cpp}}\item 
+\mbox{\hyperlink{models_8h}{models.\+h}}\end{DoxyCompactItemize}

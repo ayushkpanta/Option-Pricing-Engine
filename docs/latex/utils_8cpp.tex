@@ -1,0 +1,37 @@
+\doxysection{utils.\+cpp File Reference}
+\hypertarget{utils_8cpp}{}\label{utils_8cpp}\index{utils.cpp@{utils.cpp}}
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$cmath$>$}\newline
+{\ttfamily \#include "{}utils.\+h"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{utils_8cpp_ad5f2b7380d84469585f068e733bc38fd}{norm\+CDF}} (double x, double mean, double std)
+\begin{DoxyCompactList}\small\item\em Computes the cumulative distribution function (CDF) for a Gaussian distribution. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{utils_8cpp_ad5f2b7380d84469585f068e733bc38fd}\index{utils.cpp@{utils.cpp}!normCDF@{normCDF}}
+\index{normCDF@{normCDF}!utils.cpp@{utils.cpp}}
+\doxysubsubsection{\texorpdfstring{normCDF()}{normCDF()}}
+{\footnotesize\ttfamily \label{utils_8cpp_ad5f2b7380d84469585f068e733bc38fd} 
+double norm\+CDF (\begin{DoxyParamCaption}\item[{double}]{x}{, }\item[{double}]{mean}{ = {\ttfamily 0}, }\item[{double}]{std}{ = {\ttfamily 1}}\end{DoxyParamCaption})}
+
+
+
+Computes the cumulative distribution function (CDF) for a Gaussian distribution. 
+
+This function calculates the probability that a random variable from a Gaussian distribution with a given mean and standard deviation is less than or equal to the passed value \textquotesingle{}x\textquotesingle{}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The value at which the CDF is evaluated. \\
+\hline
+{\em mean} & The mean of the Gaussian distribution \\
+\hline
+{\em std} & The standard deviation of the Gaussian distribution. This value must be greater than 0. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The cumulative probability P(X \texorpdfstring{$<$}{<}= x) for the Gaussian distribution 
+\end{DoxyReturn}

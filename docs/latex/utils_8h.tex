@@ -1,0 +1,35 @@
+\doxysection{utils.\+h File Reference}
+\hypertarget{utils_8h}{}\label{utils_8h}\index{utils.h@{utils.h}}
+{\ttfamily \#include $<$cmath$>$}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{utils_8h_a45e577758aaaeb5f08804562f2220e61}{norm\+CDF}} (double x, double mean=0, double std=1)
+\begin{DoxyCompactList}\small\item\em Computes the cumulative distribution function (CDF) for a Gaussian distribution. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{utils_8h_a45e577758aaaeb5f08804562f2220e61}\index{utils.h@{utils.h}!normCDF@{normCDF}}
+\index{normCDF@{normCDF}!utils.h@{utils.h}}
+\doxysubsubsection{\texorpdfstring{normCDF()}{normCDF()}}
+{\footnotesize\ttfamily \label{utils_8h_a45e577758aaaeb5f08804562f2220e61} 
+double norm\+CDF (\begin{DoxyParamCaption}\item[{double}]{x}{, }\item[{double}]{mean}{ = {\ttfamily 0}, }\item[{double}]{std}{ = {\ttfamily 1}}\end{DoxyParamCaption})}
+
+
+
+Computes the cumulative distribution function (CDF) for a Gaussian distribution. 
+
+This function calculates the probability that a random variable from a Gaussian distribution with a given mean and standard deviation is less than or equal to the passed value \textquotesingle{}x\textquotesingle{}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The value at which the CDF is evaluated. \\
+\hline
+{\em mean} & The mean of the Gaussian distribution \\
+\hline
+{\em std} & The standard deviation of the Gaussian distribution. This value must be greater than 0. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The cumulative probability P(X \texorpdfstring{$<$}{<}= x) for the Gaussian distribution 
+\end{DoxyReturn}
