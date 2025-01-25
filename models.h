@@ -45,4 +45,12 @@ class BlackScholesModel {
         double compute_d2(double d1, double sigma, double T);
 };
 
+
+class BinomialModel {
+
+    public:
+        BinomialModel();
+        double price_contract(double S, double X, double sigma, double r, double T, double N, std::string type);
+};
+
 #endif
