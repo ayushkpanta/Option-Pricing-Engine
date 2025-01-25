@@ -12,7 +12,7 @@ BinomialModel::BinomialModel() {
 
 double BinomialModel::price_contract(double S, double X, double sigma, double r, double T, double N, std::string type, std::string style) {
 
-    // Get timesep and discount rate
+    // Get timestep and discount rate
     double dt = T / N;
     double discount_rate = std::exp(-r * dt);
 
@@ -44,10 +44,13 @@ double BinomialModel::price_contract(double S, double X, double sigma, double r,
     for (int i = N - 1; i >= 0; i--) {
         for (int j = 0; j <= i; j++) {
 
+            // Compute the value we get from waiting to exercize the contract
             double continuation_value = discount_rate * (p_u * contract_value[j+1] + p_d * contract_value[j]);
 
+            // If American...
             if (style == "AMERICAN") {
 
+                // Compute the intrinsic value from immediately exercizing the contract
                 double intrinsic_value;
                 if (type == "CALL") {
                     intrinsic_value = std::max(stock_prices[j] - X, 0.0);
@@ -55,8 +58,10 @@ double BinomialModel::price_contract(double S, double X, double sigma, double r,
                     intrinsic_value = std::max(X - stock_prices[j], 0.0);
                 }
 
+                // Select the maximum value
                 contract_value[j] = std::max(intrinsic_value, continuation_value);
 
+            // For European, we must wait
             } else if (style == "EUROPEAN") {
                 contract_value[j] = continuation_value;
             }

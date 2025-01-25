@@ -4,7 +4,7 @@
 
 #include <cmath>
 
-// Tring Doxygen :) 
+// Trying Doxygen :) 
 /**
  * @brief Computes the cumulative distribution function (CDF) for a Gaussian distribution.
  * 
