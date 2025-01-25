@@ -4,6 +4,7 @@
 #include <vector>
 #include <tuple>
 #include <string>
+#include "Eigen/Dense"
 
 BinomialModel::BinomialModel() {
     std::cout << "Initialized Binomial Model.\n";

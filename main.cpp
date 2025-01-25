@@ -22,8 +22,8 @@ int main() {
 
     // Price basic calls and put @ strike of 95.00 using Black-Scholes
     std::cout << "Black-Scholes:\n";
-    std::cout << "Call Price: " << black_scholes.price_call(S, X, sigma, r, T) << "\n";
-    std::cout << "Put Price: " << black_scholes.price_put(S, X, sigma, r, T) << "\n\n";
+    std::cout << "Call Price: " << black_scholes.price_contract(S, X, sigma, r, T, "CALL") << "\n";
+    std::cout << "Put Price: " << black_scholes.price_contract(S, X, sigma, r, T, "PUT") << "\n\n";
 
     // Extra test parameter (steps) for Binomial
     double N = 100.0;

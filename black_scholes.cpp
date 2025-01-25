@@ -3,27 +3,27 @@
 #include "utils.h"
 #include "models.h"
 
-
 // Constructor: flagging that the model is initialized
 BlackScholesModel::BlackScholesModel(){
     std::cout << "Initialized Black-Scholes Model.\n";
 }
 
-// Calculating call option price
-double BlackScholesModel::price_call(double S, double X, double sigma, double r, double T) {
-    double d1 = compute_d1(S, X, sigma, r, T);
-    double d2 = compute_d2(d1, sigma, T);
-    double call_price = S * normCDF(d1) - X * std::exp(-r * T) * normCDF(d2);
-    return call_price;
- }
+// Calculating option price
+double BlackScholesModel::price_contract(double S, double X, double sigma, double r, double T, std::string type) {
 
-// Calculating put option price
-double BlackScholesModel::price_put(double S, double X, double sigma, double r, double T) {
+    // Compute sub-parameters
     double d1 = compute_d1(S, X, sigma, r, T);
     double d2 = compute_d2(d1, sigma, T);
-    double put_price = X * std::exp(-r * T) * normCDF(-d2) - S * normCDF(-d1);
-    return put_price;
-}
+
+    // Compute price based on contract type
+    double price;
+    if (type == "CALL") {
+        price = S * normCDF(d1) - X * std::exp(-r * T) * normCDF(d2);
+    } else if (type == "PUT") {
+        price = X * std::exp(-r * T) * normCDF(-d2) - S * normCDF(-d1);
+    }
+    return price;
+ }
 
  // Internal computations 
  double BlackScholesModel::compute_d1(double S, double X, double sigma, double r, double T) {
