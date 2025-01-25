@@ -10,7 +10,7 @@ BinomialModel::BinomialModel() {
     std::cout << "Initialized Binomial Model.\n";
 }
 
-double BinomialModel::price_contract(double S, double X, double sigma, double r, double T, double N, std::string type) {
+double BinomialModel::price_contract(double S, double X, double sigma, double r, double T, double N, std::string type, std::string style) {
 
     // Get timesep and discount rate
     double dt = T / N;
@@ -28,10 +28,11 @@ double BinomialModel::price_contract(double S, double X, double sigma, double r,
         stock_prices[i] = S * std::pow(d, N-i) * std::pow(u, i);
     }
 
-    // Computing options prices at maturity
+    // Computing options prices at maturity (intrinsic values)
     std::vector<double> contract_value(N+1, 0.0);
     for (int i = 0; i <= N; i++) {
-        // Spot - Strike if CALL, flip if PUT
+
+        // Spot - Strike if CALL, vice versa if PUT
         if (type == "CALL") {
             contract_value[i] = std::max(stock_prices[i] - X, 0.0);
         } else if (type == "PUT") {
@@ -42,7 +43,23 @@ double BinomialModel::price_contract(double S, double X, double sigma, double r,
     // Backwards induction through tree
     for (int i = N - 1; i >= 0; i--) {
         for (int j = 0; j <= i; j++) {
-            contract_value[j] = discount_rate * (p_u * contract_value[j+1] + p_d * contract_value[j]);
+
+            double continuation_value = discount_rate * (p_u * contract_value[j+1] + p_d * contract_value[j]);
+
+            if (style == "AMERICAN") {
+
+                double intrinsic_value;
+                if (type == "CALL") {
+                    intrinsic_value = std::max(stock_prices[j] - X, 0.0);
+                } else if (type == "PUT") {
+                    intrinsic_value = std::max(X - stock_prices[j], 0.0);
+                }
+
+                contract_value[j] = std::max(intrinsic_value, continuation_value);
+
+            } else if (style == "EUROPEAN") {
+                contract_value[j] = continuation_value;
+            }
         }
     }
 

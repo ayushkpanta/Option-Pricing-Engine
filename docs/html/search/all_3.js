@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['price_5fcall_0',['price_call',['../class_black_scholes_model.html#a0de76d4915e4d256629fe7a6201dab32',1,'BlackScholesModel::price_call(double S, double X, double sigma, double r, double T)'],['../class_black_scholes_model.html#a0de76d4915e4d256629fe7a6201dab32',1,'BlackScholesModel::price_call(double S, double X, double sigma, double r, double T)']]],
-  ['price_5fput_1',['price_put',['../class_black_scholes_model.html#adbc9a0016f330e9af27101a0063ce6d5',1,'BlackScholesModel::price_put(double S, double X, double sigma, double r, double T)'],['../class_black_scholes_model.html#adbc9a0016f330e9af27101a0063ce6d5',1,'BlackScholesModel::price_put(double S, double X, double sigma, double r, double T)']]]
+  ['normcdf_0',['normCDF',['../utils_8cpp.html#ad5f2b7380d84469585f068e733bc38fd',1,'normCDF(double x, double mean, double std):&#160;utils.cpp'],['../utils_8h.html#a45e577758aaaeb5f08804562f2220e61',1,'normCDF(double x, double mean=0, double std=1):&#160;utils.cpp']]]
 ];

@@ -25,6 +25,7 @@
 var NAVTREE =
 [
   [ "Options Pricer", "index.html", [
+    [ "Option-Pricing-Engine", "md__r_e_a_d_m_e.html", null ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
       [ "Class Index", "classes.html", null ],

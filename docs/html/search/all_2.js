@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['normcdf_0',['normCDF',['../utils_8cpp.html#ad5f2b7380d84469585f068e733bc38fd',1,'normCDF(double x, double mean, double std):&#160;utils.cpp'],['../utils_8h.html#a45e577758aaaeb5f08804562f2220e61',1,'normCDF(double x, double mean=0, double std=1):&#160;utils.cpp']]]
+  ['main_0',['main',['../main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main.cpp']]],
+  ['main_2ecpp_1',['main.cpp',['../main_8cpp.html',1,'']]],
+  ['models_2eh_2',['models.h',['../models_8h.html',1,'']]]
 ];
