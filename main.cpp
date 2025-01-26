@@ -8,7 +8,8 @@
 /**
  * @brief Entry point for the options pricing engine. Currently only hosts examples pricings using the Black-Scholes and Binomial models, as well as a PNL matrix using Black-Scholes.
  */
-int main() {
+int main()
+{
 
     // Initialize models
     std::cout << "\n";
@@ -35,7 +36,6 @@ int main() {
     std::cout << "Call Price (EUROPEAN): " << binomial.price_contract(S, X, sigma, r, T, N, "CALL", "EUROPEAN") << "\n";
     std::cout << "Put Price (AMERICAN): " << binomial.price_contract(S, X, sigma, r, T, N, "PUT", "AMERICAN") << "\n";
     std::cout << "Put Price (EUROPEAN): " << binomial.price_contract(S, X, sigma, r, T, N, "PUT", "EUROPEAN") << "\n\n";
-
 
     // Basic PNL display
     std::cout << "PNL Matrix for Long Calls using Black-Scholes" << "\n";
@@ -65,12 +65,14 @@ int main() {
     // std::cin >> N;
 
     // Compute long call pnl
-    std::cout << "\n" << "Long Call PNL:" << "\n";
-    std::vector<std::vector<double> > pnl_long_call = black_scholes.compute_pnl(S_curr, S_min, S_max, X_tst, sigma, r, T_tst, "CALL");
+    std::cout << "\n"
+              << "Long Call PNL:" << "\n";
+    std::vector<std::vector<double>> pnl_long_call = black_scholes.compute_pnl(S_curr, S_min, S_max, X_tst, sigma, r, T_tst, "CALL");
 
     // Compute long put pnl
-    std::cout << "\n" << "Long Put PNL:" << "\n";
-    std::vector<std::vector<double> > pnl_long_put = black_scholes.compute_pnl(S_curr, S_min, S_max, X_tst, sigma, r, T_tst, "PUT");
+    std::cout << "\n"
+              << "Long Put PNL:" << "\n";
+    std::vector<std::vector<double>> pnl_long_put = black_scholes.compute_pnl(S_curr, S_min, S_max, X_tst, sigma, r, T_tst, "PUT");
 
     std::cout << "\n";
     return 0;
