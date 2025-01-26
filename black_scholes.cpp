@@ -2,6 +2,7 @@
 #include <iostream>
 #include "utils.h"
 #include "models.h"
+#include <vector>
 
 // Constructor: flagging that the model is initialized
 BlackScholesModel::BlackScholesModel(){
@@ -31,4 +32,39 @@ double BlackScholesModel::price_contract(double S, double X, double sigma, doubl
 }
 double BlackScholesModel::compute_d2(double d1, double sigma, double T) { 
     return d1 - sigma * std::sqrt(T);
+}
+
+
+// Generate PNL matrix
+std::vector<std::vector<double> > BlackScholesModel::compute_pnl(double S_curr, double S_min, double S_max, double X, double sigma, double r, double T, std::string type) {
+
+    // Initialize a 2d vector for PNL
+    std::vector<std::vector<double> > pnl_matrix;
+
+    // Get premium
+    double premium = price_contract(S_curr, X, sigma, r, T, type);
+
+    // Loop through timesteps per price
+    for (double spot_price = S_min; spot_price <= S_max; spot_price++) {
+
+        // Initialize vector per spot_price
+        std::vector<double> row_vec;
+
+        for (double dte = T; dte >= 0; dte--) {
+
+            // Compute PNL and % change for contract
+            double pnl = price_contract(spot_price, X, sigma, r, dte, type) - premium;
+            double pct = (pnl / premium) * 100.0;
+
+            // Add to vector
+            row_vec.push_back(pnl);
+        }
+
+        // Add vector to 2d vector
+        pnl_matrix.push_back(row_vec);
+    }
+
+    // Show and display
+    display_matrix(pnl_matrix);
+    return pnl_matrix;
 }

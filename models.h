@@ -17,6 +17,7 @@ class BlackScholesModel {
 
     public:
         BlackScholesModel();
+
         /**
          * @brief Computes the price of a European option using the Black-Scholes model.
          * 
@@ -29,6 +30,9 @@ class BlackScholesModel {
          * @return The price of the call option.
          */
         double price_contract(double S, double X, double sigma, double r, double T, std::string type);
+        
+        std::vector<std::vector<double> > compute_pnl(double S_curr, double S_min, double S_max, double X, double sigma, double r, double T, std::string type);
+
     private:
         // Internal compuations
         double compute_d1(double S, double X, double sigma, double r, double T);

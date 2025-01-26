@@ -17,4 +17,8 @@
  */
 double normCDF(double x, double mean = 0, double std = 1);
 
+double round_double(double x, double precision = 100.0);
+
+void display_matrix(std::vector<std::vector<double> > matrix);
+
 #endif 
