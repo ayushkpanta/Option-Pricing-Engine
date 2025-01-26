@@ -70,6 +70,8 @@ public:
      * @return The price of the call option.
      */
     double price_contract(double S, double X, double sigma, double r, double T, double N, std::string type, std::string style);
+
+    std::vector<std::vector<double>> compute_pnl(double S_curr, double S_min, double S_max, double X, double sigma, double r, double T, double N, std::string type, std::string style);
 };
 
 #endif

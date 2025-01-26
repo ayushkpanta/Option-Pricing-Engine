@@ -38,14 +38,15 @@ int main()
     std::cout << "Put Price (EUROPEAN): " << binomial.price_contract(S, X, sigma, r, T, N, "PUT", "EUROPEAN") << "\n\n";
 
     // Basic PNL display
-    std::cout << "PNL Matrix for Long Calls using Black-Scholes" << "\n";
+    std::cout << "PNL Matrix for Long Options using Black-Scholes" << "\n";
 
     // request user input
     double S_curr;
     double S_min;
     double S_max;
     double X_tst;
-    double T_tst = 5.0;
+    double T_tst = 10.0;
+    double N_tst = 10.0;
     std::cout << "Please enter the requested data:" << "\n";
     std::cout << "Current spot price: ";
     std::cin >> S_curr;
@@ -67,12 +68,26 @@ int main()
     // Compute long call pnl
     std::cout << "\n"
               << "Long Call PNL:" << "\n";
-    std::vector<std::vector<double>> pnl_long_call = black_scholes.compute_pnl(S_curr, S_min, S_max, X_tst, sigma, r, T_tst, "CALL");
+    std::vector<std::vector<double>> pnl_long_call_bsm = black_scholes.compute_pnl(S_curr, S_min, S_max, X_tst, sigma, r, T_tst, "CALL");
 
     // Compute long put pnl
     std::cout << "\n"
               << "Long Put PNL:" << "\n";
-    std::vector<std::vector<double>> pnl_long_put = black_scholes.compute_pnl(S_curr, S_min, S_max, X_tst, sigma, r, T_tst, "PUT");
+    std::vector<std::vector<double>> pnl_long_put_bsm = black_scholes.compute_pnl(S_curr, S_min, S_max, X_tst, sigma, r, T_tst, "PUT");
+
+    std::cout << "\n";
+    // Basic PNL display
+    std::cout << "PNL Matrix for Long Options (American) using Binomial" << "\n";
+
+    // Compute long call pnl
+    std::cout << "\n"
+              << "Long Call PNL:" << "\n";
+    std::vector<std::vector<double>> pnl_long_call_bm = binomial.compute_pnl(S_curr, S_min, S_max, X_tst, sigma, r, T_tst, N_tst, "CALL", "AMERICAN");
+
+    // Compute long put pnl
+    std::cout << "\n"
+              << "Long Put PNL:" << "\n";
+    std::vector<std::vector<double>> pnl_long_put_bm = binomial.compute_pnl(S_curr, S_min, S_max, X_tst, sigma, r, T_tst, N_tst, "PUT", "AMERICAN");
 
     std::cout << "\n";
     return 0;

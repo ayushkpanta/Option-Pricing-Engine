@@ -49,7 +49,7 @@ std::vector<std::vector<double>> BlackScholesModel::compute_pnl(double S_curr, d
     std::vector<std::vector<double>> pnl_matrix;
 
     // Get premium
-    double premium = price_contract(S_curr, X, sigma, r, T, type);
+    double premium = price_contract(S_curr, X, sigma, r, T / 365.0, type);
 
     // Loop through timesteps per price
     for (double spot_price = S_min; spot_price <= S_max; spot_price++)
@@ -62,7 +62,7 @@ std::vector<std::vector<double>> BlackScholesModel::compute_pnl(double S_curr, d
         {
 
             // Compute PNL and % change for contract
-            double pnl = price_contract(spot_price, X, sigma, r, dte, type) - premium;
+            double pnl = price_contract(spot_price, X, sigma, r, dte / 365.0, type) - premium;
             double pct = (pnl / premium) * 100.0;
 
             // Add to vector

@@ -4,6 +4,7 @@
 #include <vector>
 #include <tuple>
 #include <string>
+#include "utils.h"
 #include "Eigen/Dense"
 
 BinomialModel::BinomialModel()
@@ -85,4 +86,40 @@ double BinomialModel::price_contract(double S, double X, double sigma, double r,
 
     // Return contract value at the root of the binomial tree
     return contract_value[0];
+}
+
+std::vector<std::vector<double>> BinomialModel::compute_pnl(double S_curr, double S_min, double S_max, double X, double sigma, double r, double T, double N, std::string type, std::string style)
+{
+
+    // Initialize a 2d vector for PNL
+    std::vector<std::vector<double>> pnl_matrix;
+
+    // Get premium
+    double premium = price_contract(S_curr, X, sigma, r, T / 365.0, N, type, style);
+
+    // Loop through timesteps per price
+    for (double spot_price = S_min; spot_price <= S_max; spot_price++)
+    {
+
+        // Initialize vector per spot_price
+        std::vector<double> row_vec;
+
+        for (double dte = T; dte >= 0; dte--)
+        {
+
+            // Compute PNL and % change for contract
+            double pnl = price_contract(spot_price, X, sigma, r, dte / 365.0, dte, type, style) - premium;
+            double pct = (pnl / premium) * 100.0;
+
+            // Add to vector
+            row_vec.push_back(pnl);
+        }
+
+        // Add vector to 2d vector
+        pnl_matrix.push_back(row_vec);
+    }
+
+    // Show and display
+    display_matrix(pnl_matrix);
+    return pnl_matrix;
 }
