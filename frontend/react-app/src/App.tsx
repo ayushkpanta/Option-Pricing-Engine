@@ -1,6 +1,6 @@
 
-import MainContent from "./components/MainContent";
-import Parameters from "./components/Parameters";
+import MainContent from "./components/content/MainContent";
+import Parameters from "./components/input/Parameters";
 
 function App() {
 
