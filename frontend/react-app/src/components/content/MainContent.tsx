@@ -1,6 +1,6 @@
 import Header from "./Header";
-import SimpleData from "../SimpleData";
-import Spreads from "../Spreads";
+import SimpleData from "./SimpleData";
+import Spreads from "./Spreads";
 
 
 function MainContent() {

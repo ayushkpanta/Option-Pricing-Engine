@@ -42,7 +42,131 @@ function Parameters() {
     // JSX: JavaScript XML (conversion)
     return (
         <div className="flex flex-col h-screen bg-gray-200 p-4 shadow-lg">
-            <h2 className="fixed top-10 font-bold">Enter Parameters</h2>
+
+            <div className="my-2">
+                <h2 className="font-bold">Enter Parameters</h2>
+            </div>
+           
+            <div className="my-2">
+                <label>Strike Price (X)</label>
+                <div>
+                    <input
+                        id='strike'
+                        type='number'
+                        value={strike}
+                        onChange={handleStrikeChange}
+                        min={0.5}
+                        max={200}
+                        step={1}
+                    />
+                </div>
+            </div>
+
+            <div className="my-2">
+                <label>Spot Price (S)</label>
+                <div>
+                    <input
+                        id='spot'
+                        type='number'
+                        value={spot}
+                        onChange={handleSpotChange}
+                        min={0.5}
+                        max={200}
+                        step={1}
+                    />
+                </div>
+            </div>
+
+            <div className="my-2">
+                <label>Annualized Volatility (σ)</label>
+                <div>
+                    <input
+                        id='volatility'
+                        type='number'
+                        value={volatility}
+                        onChange={handlVolatilityChange}
+                        min={0.5}
+                        max={200}
+                        step={1}
+                    />
+                </div>
+            </div>
+
+            <div className="my-2">
+                <label>Annualized Risk Free Interest Rate (r)</label>
+                <div>
+                    <input
+                        id='risk_free_rate'
+                        type='number'
+                        value={risk_free_rate}
+                        onChange={handleRiskFreeRateChange}
+                        min={0.5}
+                        max={200}
+                        step={1}
+                    />
+                </div>
+            </div>
+
+            <div className="my-2">
+                <label>Time To Expiration in Years (T)</label>
+                <div>
+                    <input
+                        id='time_to_expiration'
+                        type='number'
+                        value={time_to_expiration}
+                        onChange={handleTimeToExpirationChange}
+                        min={0.5}
+                        max={200}
+                        step={1}
+                    />
+                </div>
+            </div>
+
+            <div className="my-2">
+                <label>Timesteps (N)</label>
+                <div>
+                    <input
+                        id='timesteps'
+                        type='number'
+                        value={timesteps}
+                        onChange={handleTimestepsChange}
+                        min={0.5}
+                        max={200}
+                        step={1}
+                    />
+                </div>
+            </div>
+
+            <div className="my-2">
+                <label>Minimum Price for Spread</label>
+                <div>
+                    <input
+                        id='price_low'
+                        type='number'
+                        value={price_low}
+                        onChange={handlePriceLowChange}
+                        min={0.5}
+                        max={200}
+                        step={1}
+                    />
+                </div>
+            </div>
+
+            <div className="my-2">
+                <label>Maximum Price for Spread</label>
+                <div>
+                    <input
+                        id='price_high'
+                        type='number'
+                        value={price_high}
+                        onChange={handlePriceHighChange}
+                        min={0.5}
+                        max={200}
+                        step={1}
+                    />
+                </div>
+            </div>
+
         </div>
     );
 } 
