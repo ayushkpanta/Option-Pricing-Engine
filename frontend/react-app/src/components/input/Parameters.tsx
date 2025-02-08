@@ -16,7 +16,7 @@ function Parameters() {
     const [style, setStyle] = useState('AMERICAN');
 
     // handle updates
-    const handleModelChange = (e: React.ChangeEvent<HTMLInputElement>) => setModel(e.target.value);
+    // const handleModelChange = (e: React.ChangeEvent<HTMLInputElement>) => setModel(e.target.value);
 
     const handleStrikeChange = (e: React.ChangeEvent<HTMLInputElement>) => setStrike(Number(e.target.value));
 
@@ -46,6 +46,26 @@ function Parameters() {
             <div className="my-2">
                 <h2 className="font-bold">Enter Parameters</h2>
             </div>
+
+
+                <div className="my-2 flex items-center justify-center">
+        <span className="mr-2">Black-Scholes</span>
+        <div
+            className="relative w-15 h-8 cursor-pointer rounded-full bg-gray-300"
+            onClick={() => {
+                const newModel = model === 'BLACK-SCHOLES' ? 'BINOMIAL' : 'BLACK-SCHOLES';
+                setModel(newModel) // actually can just update it directly
+                // console.log(newModel)
+            }}
+        >
+            <div
+                className={`absolute top-0 left-0 w-8 h-8 bg-white rounded-full shadow-md transition-all duration-300 ${model === 'BLACK-SCHOLES' ? 'transform translate-x-0' : 'transform translate-x-7'}`}
+            />
+        </div>
+
+        <span className="ml-2">Binomial</span>
+    </div>
+
            
             <div className="my-2">
                 <label>Strike Price (X)</label>
@@ -123,7 +143,7 @@ function Parameters() {
             </div>
 
             <div className="my-2">
-                <label>Timesteps (N)</label>
+                <label className={`${model === 'BLACK-SCHOLES' ? 'text-gray-500' : ''}`}>Timesteps (N)</label>
                 <div>
                     <input
                         id='timesteps'
@@ -133,9 +153,14 @@ function Parameters() {
                         min={0.5}
                         max={200}
                         step={1}
+                        disabled={model === 'BLACK-SCHOLES'}
+                        className={`${
+                            model === 'BLACK-SCHOLES' ? 'text-gray-00 opacity-50 cursor-not-allowed' : ''
+                        }`}
                     />
                 </div>
             </div>
+
 
             <div className="my-2">
                 <label>Minimum Price for Spread</label>
