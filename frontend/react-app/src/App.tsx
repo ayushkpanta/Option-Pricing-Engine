@@ -19,38 +19,6 @@ function App() {
       </div>
 
     </div>
-
-      
-    //   <div className="parameters">
-    //     <Parameters/>
-    //   </div>
-
-    //   <div className="main">
-
-    //     <h1>TEST</h1>
-
-
-
-    //     <div className="header">
-    //     </div>
-
-    //     <div className="basic_display">
-    //     </div>
-
-    //     <div className="spread_display">
-    //     </div>
-
-    //   </div>
-
-
-
-        
-
-
-    // </>
-
- 
-
   );
 
 }

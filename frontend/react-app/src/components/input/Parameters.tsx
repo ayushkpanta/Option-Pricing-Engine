@@ -1,4 +1,4 @@
-import React, {useState} from 'react'; // need useState to communicate
+import React, {useEffect, useState} from 'react'; 
 
 function Parameters() {
 
@@ -12,7 +12,7 @@ function Parameters() {
     const [risk_free_rate, setRiskFreeRate] = useState(0.05);
     const [time_to_expiration, setTimeToExpiration] = useState(30);
     const [timesteps, setTimesteps] = useState(30);
-    const [type, setType] = useState('CALL');
+    // const [type, setType] = useState('CALL');
     const [style, setStyle] = useState('AMERICAN');
 
     // handle updates
@@ -34,10 +34,44 @@ function Parameters() {
 
     const handleTimestepsChange = (e: React.ChangeEvent<HTMLInputElement>) => setTimesteps(Number(e.target.value));
 
-    const handleTypeChange = (e: React.ChangeEvent<HTMLInputElement>) => setType(e.target.value);
+    // const handleTypeChange = (e: React.ChangeEvent<HTMLInputElement>) => setType(e.target.value);
 
-    const handleStyleChange = (e: React.ChangeEvent<HTMLInputElement>) => setStyle(e.target.value);
+    // const handleStyleChange = (e: React.ChangeEvent<HTMLInputElement>) => setStyle(e.target.value);
+    useEffect(() => {
+        sendRequest();
+    }, 
+    [spot, strike, volatility, risk_free_rate, time_to_expiration, timesteps, model, style, price_low, price_high]);
 
+    const sendRequest = async () => {
+        try {
+            const response = await fetch('http://0.0.0.0:18080/pricer_backend', {
+                method: 'POST',
+                headers: {'Content-Type':'applications/json'},
+                body: JSON.stringify({
+                    model,
+                    spot, 
+                    strike,
+                    volatility,
+                    risk_free_rate,
+                    time_to_expiration,
+                    timesteps,
+                    price_low,
+                    price_high,
+                    style
+                }),
+            });
+
+            if (!response.ok) {
+                throw new Error('Response was not ok.');
+            }
+
+            const data = await response.json();
+            console.log("Data: ", data)
+        } catch (error) {
+
+            console.error("Failed to fetch calculations from backend.")
+        }
+    }
 
     // JSX: JavaScript XML (conversion)
     return (
@@ -64,6 +98,23 @@ function Parameters() {
         </div>
 
         <span className="ml-2">Binomial</span>
+    </div>
+
+    <div className="my-2 flex items-center justify-center">
+        <span className="mr-2">American Style</span>
+        <div
+            className="relative w-15 h-8 cursor-pointer rounded-full bg-gray-300"
+            onClick={() => {
+                const newStyle = style === 'AMERICAN' ? 'EUROPEAN' : 'AMERICAN';
+                setStyle(newStyle)
+            }}
+        >
+            <div
+                className={`absolute top-0 left-0 w-8 h-8 bg-white rounded-full shadow-md transition-all duration-300 ${style === 'AMERICAN' ? 'transform translate-x-0' : 'transform translate-x-7'}`}
+            />
+        </div>
+
+        <span className="ml-2">European Style</span>
     </div>
 
            
@@ -201,6 +252,7 @@ function Parameters() {
 
         </div>
     );
+
 } 
 
 export default Parameters;

@@ -14,7 +14,9 @@ int main()
 {
 
     // init app
-    crow::SimpleApp app;
+    crow::Crow<crow::CORSHandler> app;
+    auto& cors = app.get_middleware<crow::CORSHandler>();
+    cors.global().headers("Content-Type").methods("POST"_method, "GET"_method);
 
     // init json parser
     using json = nlohmann::json;
@@ -34,11 +36,11 @@ int main()
             double S = input["spot"].get<double>();
             double X = input["strike"].get<double>();
             double sigma = input["volatility"].get<double>();
-            double r = input["riskFreeRate"].get<double>();
-            double T = input["timeToExpiration"].get<double>();
+            double r = input["risk_free_rate"].get<double>();
+            double T = input["time_to_expiration"].get<double>();
             double N = input["timesteps"].get<double>();
-            double S_l = input["priceLow"].get<double>();
-            double S_h = input["priceHigh"].get<double>();
+            double S_l = input["price_low"].get<double>();
+            double S_h = input["price_high"].get<double>();
             std::string style = input["style"].get<std::string>();
 
             // declare vars
