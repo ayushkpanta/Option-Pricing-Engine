@@ -4,6 +4,7 @@
 #include "models.h"
 #include "utils.h"
 #include <vector>
+#include "crow_all.h"
 
 /**
  * @brief Entry point for the options pricing engine. Currently only hosts examples pricings using the Black-Scholes and Binomial models, as well as a PNL matrix using Black-Scholes.
