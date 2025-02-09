@@ -5,29 +5,29 @@ import Spreads from "./components/content/Spreads";
 import Parameters from "./components/input/Parameters";
 import React, {useEffect, useState} from 'react'; 
 
-
 function App() {
 
     // set up model parameters
     const [model, setModel] = useState('BLACK-SCHOLES');
     const [strike, setStrike] = useState(100);
     const [spot, setSpot] = useState(102);
-    const [price_low, setPriceLow] = useState(95);
-    const [price_high, setPriceHigh] = useState(105);
+    const [price_low, setPriceLow] = useState(90);
+    const [price_high, setPriceHigh] = useState(110);
     const [volatility, setVolatility] = useState(0.75);
     const [risk_free_rate, setRiskFreeRate] = useState(0.05);
-    const [time_to_expiration, setTimeToExpiration] = useState(30);
-    const [timesteps, setTimesteps] = useState(30);
+    const [time_to_expiration, setTimeToExpiration] = useState(25);
+    const [timesteps, setTimesteps] = useState(25);
     // const [type, setType] = useState('CALL');
     const [style, setStyle] = useState('AMERICAN');
 
     // calculations
     const [callPrice, setCallPrice] = useState(0);
     const [putPrice, setPutPrice] = useState(0);
-    const [callSpread, setCallSpread] = useState(0);
-    const [putSpread, setPutSpread] = useState(0);
+    const [callSpread, setCallSpread] = useState([[0]]);
+    const [putSpread, setPutSpread] = useState([[0]]);
     
     useEffect(() => {
+      document.body.style.overflow = 'hidden';
       sendRequest();
   }, 
   [spot, strike, volatility, risk_free_rate, time_to_expiration, timesteps, model, style, price_low, price_high]);
@@ -109,6 +109,8 @@ function App() {
           putPrice={putPrice}
           callSpread={callSpread}
           putSpread={putSpread}
+          priceHigh={price_high}
+          priceLow={price_low}
         />
 
       </div>

@@ -12,14 +12,16 @@ interface MainContentProps {
     timesteps: number;
     style: string;
     callPrice: number,
-    putPrice: number
+    putPrice: number,
+    priceLow: number,
+    priceHigh: number,
     callSpread: number[][];
     putSpread: number[][];
   }
 
 function MainContent(
     { 
-        model, strike, spot, volatility, risk_free_rate, time_to_expiration, timesteps, style, callPrice, putPrice, callSpread, putSpread
+        model, strike, spot, volatility, risk_free_rate, time_to_expiration, timesteps, style, callPrice, putPrice, callSpread, putSpread, priceHigh, priceLow
     }: MainContentProps
 ) {
 
@@ -44,6 +46,9 @@ function MainContent(
       <Spreads
           callSpread={callSpread}
           putSpread={putSpread}
+          priceLow={priceLow}
+          priceHigh={priceHigh}
+          timeToExpiration={time_to_expiration}
           />
       </div>
 
