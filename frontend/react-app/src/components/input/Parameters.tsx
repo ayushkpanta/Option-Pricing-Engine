@@ -1,28 +1,34 @@
 import React, {useEffect, useState} from 'react'; 
 
-function Parameters() {
+// interface to remove errors in signature
+interface ParametersProps {
+    model: string;
+    setModel: React.Dispatch<React.SetStateAction<string>>;
+    strike: number;
+    setStrike: React.Dispatch<React.SetStateAction<number>>;
+    spot: number;
+    setSpot: React.Dispatch<React.SetStateAction<number>>;
+    price_low: number;
+    setPriceLow: React.Dispatch<React.SetStateAction<number>>;
+    price_high: number;
+    setPriceHigh: React.Dispatch<React.SetStateAction<number>>;
+    volatility: number;
+    setVolatility: React.Dispatch<React.SetStateAction<number>>;
+    risk_free_rate: number;
+    setRiskFreeRate: React.Dispatch<React.SetStateAction<number>>;
+    time_to_expiration: number;
+    setTimeToExpiration: React.Dispatch<React.SetStateAction<number>>;
+    timesteps: number;
+    setTimesteps: React.Dispatch<React.SetStateAction<number>>;
+    style: string;
+    setStyle: React.Dispatch<React.SetStateAction<string>>;
+  }
 
-    // set up model parameters
-    const [model, setModel] = useState('BLACK-SCHOLES');
-    const [strike, setStrike] = useState(100);
-    const [spot, setSpot] = useState(102);
-    const [price_low, setPriceLow] = useState(95);
-    const [price_high, setPriceHigh] = useState(105);
-    const [volatility, setVolatility] = useState(0.75);
-    const [risk_free_rate, setRiskFreeRate] = useState(0.05);
-    const [time_to_expiration, setTimeToExpiration] = useState(30);
-    const [timesteps, setTimesteps] = useState(30);
-    // const [type, setType] = useState('CALL');
-    const [style, setStyle] = useState('AMERICAN');
-
-    // calculations
-    const [callPrice, setCallPrice] = useState(null);
-    const [putPrice, setPutPrice] = useState(null);
-    const [callSpread, setCallSpread] = useState(null);
-    const [putSpread, setPutSpread] = useState(null);
-    
-    // handle updates
-    // const handleModelChange = (e: React.ChangeEvent<HTMLInputElement>) => setModel(e.target.value);
+function Parameters({ 
+    model, setModel, strike, setStrike, spot, setSpot, price_low, setPriceLow,
+    price_high, setPriceHigh, volatility, setVolatility, risk_free_rate, setRiskFreeRate,
+    time_to_expiration, setTimeToExpiration, timesteps, setTimesteps, style, setStyle
+  }: ParametersProps) {
 
     const handleStrikeChange = (e: React.ChangeEvent<HTMLInputElement>) => setStrike(Number(e.target.value));
 
@@ -43,48 +49,7 @@ function Parameters() {
     // const handleTypeChange = (e: React.ChangeEvent<HTMLInputElement>) => setType(e.target.value);
 
     // const handleStyleChange = (e: React.ChangeEvent<HTMLInputElement>) => setStyle(e.target.value);
-    useEffect(() => {
-        sendRequest();
-    }, 
-    [spot, strike, volatility, risk_free_rate, time_to_expiration, timesteps, model, style, price_low, price_high]);
 
-    const sendRequest = async () => {
-        try {
-            const response = await fetch('http://0.0.0.0:18080/pricer_backend', {
-                method: 'POST',
-                headers: {'Content-Type':'applications/json'},
-                body: JSON.stringify({
-                    model,
-                    spot, 
-                    strike,
-                    volatility,
-                    risk_free_rate,
-                    time_to_expiration,
-                    timesteps,
-                    price_low,
-                    price_high,
-                    style
-                }),
-            });
-
-            if (!response.ok) {
-                throw new Error('Response was not ok.');
-            }
-
-            const data = await response.json();
-            setCallPrice(data.callPrice);
-            setPutPrice(data.putPrice);
-            setCallSpread(data.callSpread);
-            setPutSpread(data.putSpread);
-
-            console.log("Data: ", data)
-        } catch (error) {
-
-            console.error("Failed to fetch calculations from backend.")
-        }
-    }
-
-    // JSX: JavaScript XML (conversion)
     return (
         <div className="flex flex-col h-screen bg-gray-200 p-4 shadow-lg">
 

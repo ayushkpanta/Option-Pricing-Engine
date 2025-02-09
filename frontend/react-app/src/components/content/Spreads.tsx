@@ -1,14 +1,26 @@
 
+// interface to remove errors in signature
+interface SpreadProps {
+    callSpread: number[][];
+    putSpread: number[][];
+  }
 
-const Spreads = () => {
+function Spreads({callSpread, putSpread}: SpreadProps) {
+
+    // console.log("Spread props:", {callSpread, putSpread});
 
     return (
-        <div className="mb-8">
-            <h1 className=" text-white mb-4 font-bold text-2xl">
-                Spreads
+
+
+        <div className="mb-10">
+        <div className="">
+            <h1 className=" text-white font-bold text-2xl">
+                Calculation Parameters
             </h1>
         </div>
-    );
-}
+        </div>
+    )
+
+};
 
 export default Spreads;
