@@ -68,7 +68,7 @@ function Parameters() {
 
            
             <div className="my-2">
-                <label>Strike Price (X)</label>
+                <label className=''>Strike Price (X)</label>
                 <div>
                     <input
                         id='strike'
@@ -78,6 +78,7 @@ function Parameters() {
                         min={0.5}
                         max={200}
                         step={1}
+                        className='bg-white'
                     />
                 </div>
             </div>
@@ -93,6 +94,7 @@ function Parameters() {
                         min={0.5}
                         max={200}
                         step={1}
+                        className='bg-white'
                     />
                 </div>
             </div>
@@ -108,6 +110,7 @@ function Parameters() {
                         min={0.5}
                         max={200}
                         step={1}
+                        className='bg-white'
                     />
                 </div>
             </div>
@@ -123,6 +126,7 @@ function Parameters() {
                         min={0.5}
                         max={200}
                         step={1}
+                        className='bg-white'
                     />
                 </div>
             </div>
@@ -138,6 +142,7 @@ function Parameters() {
                         min={0.5}
                         max={200}
                         step={1}
+                        className='bg-white'
                     />
                 </div>
             </div>
@@ -155,7 +160,7 @@ function Parameters() {
                         step={1}
                         disabled={model === 'BLACK-SCHOLES'}
                         className={`${
-                            model === 'BLACK-SCHOLES' ? 'text-gray-00 opacity-50 cursor-not-allowed' : ''
+                            model === 'BLACK-SCHOLES' ? 'text-gray-00 opacity-50 cursor-not-allowed' : 'bg-white'
                         }`}
                     />
                 </div>
@@ -173,6 +178,7 @@ function Parameters() {
                         min={0.5}
                         max={200}
                         step={1}
+                        className='bg-white'
                     />
                 </div>
             </div>
@@ -188,6 +194,7 @@ function Parameters() {
                         min={0.5}
                         max={200}
                         step={1}
+                        className='bg-white'
                     />
                 </div>
             </div>
