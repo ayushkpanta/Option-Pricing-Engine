@@ -15,6 +15,12 @@ function Parameters() {
     // const [type, setType] = useState('CALL');
     const [style, setStyle] = useState('AMERICAN');
 
+    // calculations
+    const [callPrice, setCallPrice] = useState(null);
+    const [putPrice, setPutPrice] = useState(null);
+    const [callSpread, setCallSpread] = useState(null);
+    const [putSpread, setPutSpread] = useState(null);
+    
     // handle updates
     // const handleModelChange = (e: React.ChangeEvent<HTMLInputElement>) => setModel(e.target.value);
 
@@ -66,6 +72,11 @@ function Parameters() {
             }
 
             const data = await response.json();
+            setCallPrice(data.callPrice);
+            setPutPrice(data.putPrice);
+            setCallSpread(data.callSpread);
+            setPutSpread(data.putSpread);
+
             console.log("Data: ", data)
         } catch (error) {
 
@@ -178,7 +189,7 @@ function Parameters() {
                         max={200}
                         step={1}
                         className='bg-white'
-                    />
+                    />  
                 </div>
             </div>
 
