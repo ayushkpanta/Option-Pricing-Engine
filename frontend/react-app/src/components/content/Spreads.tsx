@@ -1,3 +1,5 @@
+import * as d3 from "d3";
+import {useEffect, useRef} from "react"
 
 // interface to remove errors in signature
 interface SpreadProps {
@@ -7,7 +9,8 @@ interface SpreadProps {
 
 function Spreads({callSpread, putSpread}: SpreadProps) {
 
-    // console.log("Spread props:", {callSpread, putSpread});
+    const callSpreadRef = useRef(null);
+    const putSpreadRef = useRef(null);
 
     return (
 
@@ -15,8 +18,17 @@ function Spreads({callSpread, putSpread}: SpreadProps) {
         <div className="mb-10">
         <div className="">
             <h1 className=" text-white font-bold text-2xl">
-                Calculation Parameters
+                PnL Matrices
             </h1>
+        </div>
+
+        <div className="">
+            <div className="text-white">
+                <ul className="text-white">
+                    <li>Call Spread: {callSpread}</li>
+                    <li>Put Spread (X): ${putSpread}</li>
+                </ul>
+            </div>
         </div>
         </div>
     )

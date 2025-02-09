@@ -22,10 +22,10 @@ function App() {
     const [style, setStyle] = useState('AMERICAN');
 
     // calculations
-    const [callPrice, setCallPrice] = useState(null);
-    const [putPrice, setPutPrice] = useState(null);
-    const [callSpread, setCallSpread] = useState(null);
-    const [putSpread, setPutSpread] = useState(null);
+    const [callPrice, setCallPrice] = useState(0);
+    const [putPrice, setPutPrice] = useState(0);
+    const [callSpread, setCallSpread] = useState(0);
+    const [putSpread, setPutSpread] = useState(0);
     
     useEffect(() => {
       sendRequest();
@@ -56,11 +56,11 @@ function App() {
         }
 
         const data = await response.json();
-        setCallPrice(data.callPrice);
-        setPutPrice(data.putPrice);
-        setCallSpread(data.callSpread);
-        setPutSpread(data.putSpread);
-        console.log("Data: ", data)
+        setCallPrice(data.call);
+        setPutPrice(data.put);
+        setCallSpread(data.call_spread);
+        setPutSpread(data.put_spread);
+        // console.log("Data: ", data)
     } catch (error) {
         console.error("Failed to fetch calculations from backend.")
     }
