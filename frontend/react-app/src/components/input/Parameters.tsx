@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 interface ParametersProps {
     model: string;
     setModel: React.Dispatch<React.SetStateAction<string>>;
@@ -47,13 +48,67 @@ const SegmentedControl: React.FC<{
     </div>
 );
 
+const NumberInput: React.FC<{
+    label: string;
+    value: number;
+    setValue: (value: number) => void;
+    min: number;
+    max: number;
+    step: number;
+    disabled?: boolean;
+}> = ({ label, value, setValue, min, max, step, disabled = false }) => (
+    <div className={`mb-6 ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}>
+        <label className="block text-sm font-medium text-gray-700 mb-2">{label}</label>
+        <div className="flex items-center space-x-4">
+            <div className="relative flex-grow">
+                <input
+                    type="number"
+                    value={value}
+                    onChange={(e) => setValue(parseFloat(e.target.value))}
+                    min={min}
+                    max={max}
+                    step={step}
+                    disabled={disabled}
+                    className="w-full p-2 pr-12 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                />
+                <div className="absolute inset-y-0 right-0 flex items-center pr-2">
+                    <button
+                        onClick={() => setValue(value + step)}
+                        disabled={disabled || value >= max}
+                        className="text-gray-500 hover:text-gray-700 focus:outline-none"
+                    >
+                        ▲
+                    </button>
+                    <button
+                        onClick={() => setValue(value - step)}
+                        disabled={disabled || value <= min}
+                        className="text-gray-500 hover:text-gray-700 focus:outline-none"
+                    >
+                        ▼
+                    </button>
+                </div>
+            </div>
+        </div>
+        <input
+            type="range"
+            min={min}
+            max={max}
+            step={step}
+            value={value}
+            onChange={(e) => setValue(parseFloat(e.target.value))}
+            disabled={disabled}
+            className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer mt-2"
+        />
+    </div>
+);
+
 const Parameters: React.FC<ParametersProps> = ({ 
     model, setModel, strike, setStrike, spot, setSpot, price_low, setPriceLow,
     price_high, setPriceHigh, volatility, setVolatility, risk_free_rate, setRiskFreeRate,
     time_to_expiration, setTimeToExpiration, timesteps, setTimesteps, style, setStyle
 }) => {
     return (
-        <div className="flex flex-col h-screen bg-white shadow-lg p-8 rounded-3xl">
+        <div className="flex flex-col h-screen bg-white shadow-lg p-8 rounded-3xl overflow-y-auto">
             <h2 className="text-2xl font-bold mb-6 text-gray-800">Parameters</h2>
             
             {/* Model Selector */}
@@ -77,30 +132,15 @@ const Parameters: React.FC<ParametersProps> = ({
                 />
             </div>
             
-            {/* Inputs */}
-            <div className="space-y-4">
-                {[ 
-                    { label: 'Strike Price (X)', value: strike, setValue: setStrike },
-                    { label: 'Spot Price (S)', value: spot, setValue: setSpot },
-                    { label: 'Volatility (σ)', value: volatility, setValue: setVolatility },
-                    { label: 'Risk-Free Rate (r)', value: risk_free_rate, setValue: setRiskFreeRate },
-                    { label: 'Time to Expiration (T)', value: time_to_expiration, setValue: setTimeToExpiration },
-                    { label: 'Timesteps (N)', value: timesteps, setValue: setTimesteps, disabled: model === 'BLACK-SCHOLES' },
-                    { label: 'Min Price Spread', value: price_low, setValue: setPriceLow },
-                    { label: 'Max Price Spread', value: price_high, setValue: setPriceHigh }
-                ].map(({ label, value, setValue, disabled }, idx) => (
-                    <div key={idx} className={`${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">{label}</label>
-                        <input
-                            type="number"
-                            value={value}
-                            onChange={(e) => setValue(parseFloat(e.target.value))}
-                            disabled={disabled}
-                            className="w-full p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 transition-colors"
-                        />
-                    </div>
-                ))}
-            </div>
+            {/* Numerical Inputs */}
+            <NumberInput label="Strike Price (X)" value={strike} setValue={setStrike} min={0} max={1000} step={1} />
+            <NumberInput label="Spot Price (S)" value={spot} setValue={setSpot} min={0} max={1000} step={1} />
+            <NumberInput label="Volatility (σ)" value={volatility} setValue={setVolatility} min={0} max={1} step={0.01} />
+            <NumberInput label="Risk-Free Rate (r)" value={risk_free_rate} setValue={setRiskFreeRate} min={0} max={0.2} step={0.001} />
+            <NumberInput label="Time to Expiration (T)" value={time_to_expiration} setValue={setTimeToExpiration} min={0} max={10} step={0.1} />
+            <NumberInput label="Timesteps (N)" value={timesteps} setValue={setTimesteps} min={1} max={1000} step={1} disabled={model === 'BLACK-SCHOLES'} />
+            <NumberInput label="Min Asset Price" value={price_low} setValue={setPriceLow} min={0} max={1000} step={1} />
+            <NumberInput label="Max Asset Price" value={price_high} setValue={setPriceHigh} min={0} max={1000} step={1} />
         </div>
     );
 };
