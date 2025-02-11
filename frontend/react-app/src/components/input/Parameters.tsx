@@ -1,6 +1,5 @@
-import React, {useEffect, useState} from 'react'; 
+import React from 'react';
 
-// interface to remove errors in signature
 interface ParametersProps {
     model: string;
     setModel: React.Dispatch<React.SetStateAction<string>>;
@@ -22,213 +21,88 @@ interface ParametersProps {
     setTimesteps: React.Dispatch<React.SetStateAction<number>>;
     style: string;
     setStyle: React.Dispatch<React.SetStateAction<string>>;
-  }
+}
 
-function Parameters({ 
+const SegmentedControl: React.FC<{
+    options: string[];
+    value: string;
+    onChange: (value: string) => void;
+    disabled?: boolean;
+}> = ({ options, value, onChange, disabled = false }) => (
+    <div className={`flex rounded-lg bg-gray-200 p-1 ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}>
+        {options.map((option) => (
+            <button
+                key={option}
+                className={`flex-1 px-4 py-2 text-sm font-medium rounded-md transition-colors ${
+                    value === option
+                        ? 'bg-white text-blue-600 shadow-sm'
+                        : 'text-gray-500 hover:text-gray-700'
+                }`}
+                onClick={() => !disabled && onChange(option)}
+                disabled={disabled}
+            >
+                {option}
+            </button>
+        ))}
+    </div>
+);
+
+const Parameters: React.FC<ParametersProps> = ({ 
     model, setModel, strike, setStrike, spot, setSpot, price_low, setPriceLow,
     price_high, setPriceHigh, volatility, setVolatility, risk_free_rate, setRiskFreeRate,
     time_to_expiration, setTimeToExpiration, timesteps, setTimesteps, style, setStyle
-  }: ParametersProps) {
-
-    const handleStrikeChange = (e: React.ChangeEvent<HTMLInputElement>) => setStrike(Number(e.target.value));
-
-    const handleSpotChange = (e: React.ChangeEvent<HTMLInputElement>) => setSpot(Number(e.target.value));
-
-    const handlePriceLowChange = (e: React.ChangeEvent<HTMLInputElement>) => setPriceLow(Number(e.target.value));
-
-    const handlePriceHighChange = (e: React.ChangeEvent<HTMLInputElement>) => setPriceHigh(Number(e.target.value));
-
-    const handlVolatilityChange = (e: React.ChangeEvent<HTMLInputElement>) => setVolatility(Number(e.target.value));
-
-    const handleRiskFreeRateChange = (e: React.ChangeEvent<HTMLInputElement>) => setRiskFreeRate(Number(e.target.value));
-
-    const handleTimeToExpirationChange = (e: React.ChangeEvent<HTMLInputElement>) => setTimeToExpiration(Number(e.target.value));
-
-    const handleTimestepsChange = (e: React.ChangeEvent<HTMLInputElement>) => setTimesteps(Number(e.target.value));
-
-    // const handleTypeChange = (e: React.ChangeEvent<HTMLInputElement>) => setType(e.target.value);
-
-    // const handleStyleChange = (e: React.ChangeEvent<HTMLInputElement>) => setStyle(e.target.value);
-
+}) => {
     return (
-        <div className="flex flex-col h-screen bg-gray-200 p-4 shadow-lg">
-
-            <div className="my-2">
-                <h2 className="font-bold">Enter Parameters</h2>
+        <div className="flex flex-col h-screen bg-white shadow-lg p-8 rounded-3xl">
+            <h2 className="text-2xl font-bold mb-6 text-gray-800">Parameters</h2>
+            
+            {/* Model Selector */}
+            <div className="mb-6">
+                <label className="block text-sm font-medium text-gray-700 mb-2">Model</label>
+                <SegmentedControl
+                    options={['BLACK-SCHOLES', 'BINOMIAL']}
+                    value={model}
+                    onChange={setModel}
+                />
             </div>
-
-
-                <div className="my-2 flex items-center justify-center">
-        <span className="mr-2">Black-Scholes</span>
-        <div
-            className="relative w-15 h-8 cursor-pointer rounded-full bg-gray-300"
-            onClick={() => {
-                const newModel = model === 'BLACK-SCHOLES' ? 'BINOMIAL' : 'BLACK-SCHOLES';
-                setModel(newModel) // actually can just update it directly
-                // console.log(newModel)
-            }}
-        >
-            <div
-                className={`absolute top-0 left-0 w-8 h-8 bg-white rounded-full shadow-md transition-all duration-300 ${model === 'BLACK-SCHOLES' ? 'transform translate-x-0' : 'transform translate-x-7'}`}
-            />
-        </div>
-
-        <span className="ml-2">Binomial</span>
-    </div>
-
-    <div className="my-2 flex items-center justify-center">
-        <span className="mr-2">American Style</span>
-        <div
-            className="relative w-15 h-8 cursor-pointer rounded-full bg-gray-300"
-            onClick={() => {
-                const newStyle = style === 'AMERICAN' ? 'EUROPEAN' : 'AMERICAN';
-                setStyle(newStyle)
-            }}
-        >
-            <div
-                className={`absolute top-0 left-0 w-8 h-8 bg-white rounded-full shadow-md transition-all duration-300 ${style === 'AMERICAN' ? 'transform translate-x-0' : 'transform translate-x-7'}`}
-            />
-        </div>
-
-        <span className="ml-2">European Style</span>
-    </div>
-
-           
-            <div className="my-2">
-                <label className=''>Strike Price (X)</label>
-                <div>
-                    <input
-                        id='strike'
-                        type='number'
-                        value={strike}
-                        onChange={handleStrikeChange}
-                        min={0.5}
-                        max={200}
-                        step={1}
-                        className='bg-white'
-                    />
-                </div>
+            
+            {/* Style Selector */}
+            <div className="mb-6">
+                <label className="block text-sm font-medium text-gray-700 mb-2">Style</label>
+                <SegmentedControl
+                    options={['AMERICAN', 'EUROPEAN']}
+                    value={style}
+                    onChange={setStyle}
+                    disabled={model === 'BLACK-SCHOLES'}
+                />
             </div>
-
-            <div className="my-2">
-                <label>Spot Price (S)</label>
-                <div>
-                    <input
-                        id='spot'
-                        type='number'
-                        value={spot}
-                        onChange={handleSpotChange}
-                        min={0.5}
-                        max={200}
-                        step={1}
-                        className='bg-white'
-                    />
-                </div>
+            
+            {/* Inputs */}
+            <div className="space-y-4">
+                {[ 
+                    { label: 'Strike Price (X)', value: strike, setValue: setStrike },
+                    { label: 'Spot Price (S)', value: spot, setValue: setSpot },
+                    { label: 'Volatility (σ)', value: volatility, setValue: setVolatility },
+                    { label: 'Risk-Free Rate (r)', value: risk_free_rate, setValue: setRiskFreeRate },
+                    { label: 'Time to Expiration (T)', value: time_to_expiration, setValue: setTimeToExpiration },
+                    { label: 'Timesteps (N)', value: timesteps, setValue: setTimesteps, disabled: model === 'BLACK-SCHOLES' },
+                    { label: 'Min Price Spread', value: price_low, setValue: setPriceLow },
+                    { label: 'Max Price Spread', value: price_high, setValue: setPriceHigh }
+                ].map(({ label, value, setValue, disabled }, idx) => (
+                    <div key={idx} className={`${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">{label}</label>
+                        <input
+                            type="number"
+                            value={value}
+                            onChange={(e) => setValue(parseFloat(e.target.value))}
+                            disabled={disabled}
+                            className="w-full p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                        />
+                    </div>
+                ))}
             </div>
-
-            <div className="my-2">
-                <label>Annualized Volatility (σ)</label>
-                <div>
-                    <input
-                        id='volatility'
-                        type='number'
-                        value={volatility}
-                        onChange={handlVolatilityChange}
-                        min={0.5}
-                        max={200}
-                        step={1}
-                        className='bg-white'
-                    />
-                </div>
-            </div>
-
-            <div className="my-2">
-                <label>Annualized Risk Free Interest Rate (r)</label>
-                <div>
-                    <input
-                        id='risk_free_rate'
-                        type='number'
-                        value={risk_free_rate}
-                        onChange={handleRiskFreeRateChange}
-                        min={0.5}
-                        max={200}
-                        step={1}
-                        className='bg-white'
-                    />  
-                </div>
-            </div>
-
-            <div className="my-2">
-                <label>Time To Expiration in Years (T)</label>
-                <div>
-                    <input
-                        id='time_to_expiration'
-                        type='number'
-                        value={time_to_expiration}
-                        onChange={handleTimeToExpirationChange}
-                        min={0.5}
-                        max={200}
-                        step={1}
-                        className='bg-white'
-                    />
-                </div>
-            </div>
-
-            <div className="my-2">
-                <label className={`${model === 'BLACK-SCHOLES' ? 'text-gray-500' : ''}`}>Timesteps (N)</label>
-                <div>
-                    <input
-                        id='timesteps'
-                        type='number'
-                        value={timesteps}
-                        onChange={handleTimestepsChange}
-                        min={0.5}
-                        max={200}
-                        step={1}
-                        disabled={model === 'BLACK-SCHOLES'}
-                        className={`${
-                            model === 'BLACK-SCHOLES' ? 'text-gray-00 opacity-50 cursor-not-allowed' : 'bg-white'
-                        }`}
-                    />
-                </div>
-            </div>
-
-
-            <div className="my-2">
-                <label>Minimum Price for Spread</label>
-                <div>
-                    <input
-                        id='price_low'
-                        type='number'
-                        value={price_low}
-                        onChange={handlePriceLowChange}
-                        min={0.5}
-                        max={200}
-                        step={1}
-                        className='bg-white'
-                    />
-                </div>
-            </div>
-
-            <div className="my-2">
-                <label>Maximum Price for Spread</label>
-                <div>
-                    <input
-                        id='price_high'
-                        type='number'
-                        value={price_high}
-                        onChange={handlePriceHighChange}
-                        min={0.5}
-                        max={200}
-                        step={1}
-                        className='bg-white'
-                    />
-                </div>
-            </div>
-
         </div>
     );
-
-} 
+};
 
 export default Parameters;
